@@ -1,15 +1,8 @@
 const https = require("https");
-function sendMenssagesWhatsapp(textResponse,number){
-    const data =JSON.stringify({
-        "messaging_product": "whatsapp",    
-        "recipient_type": "individual",
-        "to": number,
-        "type": "text",
-        "text": {
-            "preview_url": false,
-            "body": textResponse
-        }
-    })
+require('dotenv').config();
+const apiKey = process.env.API_KEY;
+function sendMenssagesWhatsapp(data){
+   
     const options = {
         host :"graph.facebook.com",
         path:"/v16.0/109241808832264/messages",
@@ -17,7 +10,7 @@ function sendMenssagesWhatsapp(textResponse,number){
         body:data,
         headers:{
             "Content-Type":"application/json",
-            Authorization:"Bearer EAADFZCJXqZC7QBAF567k3yZAs4JYkELyPB9XtyQlcbWyPIRZCB6duVzI2bXHK2I1snsdPoX6ybMxfgrrZCsWRGybiHYyvPNfczoZBMloFe0j3aI7OpOdMBXZBU5FCxb9cZBdsitNWFCJ5SiNwq9gVQcXIA87zEofbRpmkrnnuBYkBThArozHBD8VZCxKv6PMfZC0Tj5LQWZCnb1uAZDZD"
+            Authorization: apiKey
         }
     }
 const req = https.request(options, res => {
